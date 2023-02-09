@@ -2,8 +2,10 @@ package com.springsecurity.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "Userss")
 public class Users {
 
 	@Id
