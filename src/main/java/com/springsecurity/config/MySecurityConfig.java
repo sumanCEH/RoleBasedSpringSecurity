@@ -40,8 +40,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/public/**").permitAll()
 				.antMatchers("/token").permitAll()
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
-				.antMatchers("/user/**").hasRole("NORMAL")
+				.antMatchers("/employee/**").hasRole("EMPLOYEE")
 				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/customer/**").hasRole("CUSTOMER")
 				.anyRequest()
 				.authenticated()
 				.and()
@@ -54,8 +55,9 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(AuthenticationManagerBuilder auth ) throws Exception{
 			//auth.inMemoryAuthentication().withUser("admin").password(this.passwordEncoder().encode("admin")).roles("ADMIN");
-			//auth.inMemoryAuthentication().withUser("user").password(this.passwordEncoder().encode("user")).roles("NORMAL");
-		
+			//auth.inMemoryAuthentication().withUser("employee").password(this.passwordEncoder().encode("employee")).roles("NORMAL");
+			//auth.inMemoryAuthentication().withUser("customer").password(this.passwordEncoder().encode("employee")).roles("NORMAL");
+			
 			auth.userDetailsService(customerDetailsService).passwordEncoder(passwordEncoder());
 
 		}

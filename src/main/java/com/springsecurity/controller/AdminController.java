@@ -30,7 +30,7 @@ public class AdminController {
 		return "Admin Home page";
 	}
 
-	@PostMapping(path="/registerAdmin", consumes="application/json")
+	@PostMapping(path="/register/admin", consumes="application/json")
 	public String addAdmin(@RequestBody Users users) {
 
 		if (!usersRepo.findById(users.getUsersEmail()).isPresent()) {
@@ -45,12 +45,12 @@ public class AdminController {
 
 	}
 
-	@PostMapping(path="/registerUser", consumes="application/json")
+	@PostMapping(path="/register/employee", consumes="application/json")
 	public String addUser(@RequestBody Users users) {
 
 		if (!usersRepo.findById(users.getUsersEmail()).isPresent()) {
 			users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
-			users.setRole("ROLE_USER");
+			users.setRole("ROLE_EMPLOYEE");
 			usersService.addUser(users);
 			usersRepo.save(users);
 			return "save User";

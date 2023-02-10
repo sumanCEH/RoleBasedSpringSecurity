@@ -30,12 +30,12 @@ public class HomeController {
 		return "Home page for all";
 	}
 
-	@PostMapping("/registerUser")
+	@PostMapping("/register/customer")
 	public String addUser(@RequestBody Users users) {
 
 		if (!usersRepo.findById(users.getUsersEmail()).isPresent()) {
 			users.setPassword(bCryptPasswordEncoder.encode(users.getPassword()));
-			users.setRole("ROLE_USER");
+			users.setRole("ROLE_CUSTOMER");
 			usersService.addUser(users);
 			usersRepo.save(users);
 			return "save User";
