@@ -25,9 +25,9 @@ public class AdminController {
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
-	@GetMapping("/index")
+	@GetMapping("/login")
 	public String home() {
-		return "Admin Home page";
+		return "Admin login Home page";
 	}
 
 	@PostMapping(path="/register/admin", consumes="application/json")
