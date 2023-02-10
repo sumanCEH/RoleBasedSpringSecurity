@@ -10,7 +10,7 @@ import com.springsecurity.entity.Users;
 import com.springsecurity.repository.UsersRepo;
 
 @Service
-public class CustomerUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	private UsersRepo usersRepo;
@@ -21,7 +21,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
 		if (users == null) {
 			throw new UsernameNotFoundException("User Not Found");
 		}else {
-		return new CustomerUserDetails(users);
+		return new CustomUserDetails(users);
 	}
 	}
 }

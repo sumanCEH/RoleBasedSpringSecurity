@@ -1,7 +1,6 @@
 package com.springsecurity.jwthelper.model;
 
 public class JwtResponse {
-
 	String token;
 
     public JwtResponse() {

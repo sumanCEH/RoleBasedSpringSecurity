@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.springsecurity.entity.Users;
 
 
-public class CustomerUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
 
 	
 	 Users users;
 
-	public CustomerUserDetails(Users users) {
+	public CustomUserDetails(Users users) {
 		super();
 		this.users = users;
 	}

@@ -15,13 +15,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.springsecurity.jwthelper.JwtUtil;
-import com.springsecurity.service.CustomerUserDetailsService;
+import com.springsecurity.service.CustomUserDetailsService;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 	 @Autowired
-	    private CustomerUserDetailsService customUserDetailsService;
+	    private CustomUserDetailsService customUserDetailsService;
 
 	    @Autowired
 	    private JwtUtil jwtUtil;

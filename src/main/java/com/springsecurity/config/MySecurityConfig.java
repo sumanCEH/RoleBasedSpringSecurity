@@ -14,15 +14,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import com.springsecurity.service.CustomerUserDetailsService;
+import com.springsecurity.service.CustomUserDetailsService;
 
 
+@SuppressWarnings("deprecation")
 @Configuration
 @EnableWebSecurity
 public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Autowired
-	CustomerUserDetailsService customerDetailsService;
+	CustomUserDetailsService customerDetailsService;
 	
 	  @Autowired
 	    private JwtAuthenticationFilter jwtFilter;
@@ -41,31 +42,32 @@ public class MySecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.OPTIONS).permitAll()
 				.antMatchers("/user/**").hasRole("NORMAL")
 				.antMatchers("/admin/**").hasRole("ADMIN")
-				.anyRequest().authenticated().and()
+				.anyRequest()
+				.authenticated()
+				.and()
 				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-				.and().exceptionHandling()
-				.authenticationEntryPoint(entryPoint);
+	            .and()
+	            .exceptionHandling().authenticationEntryPoint(entryPoint);
+		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+	}
 			
-			 http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-	}
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth ) throws Exception{
-//		auth.inMemoryAuthentication().withUser("admin1").password(this.passwordEncoder().encode("admin")).roles("ADMIN");
-//		auth.inMemoryAuthentication().withUser("user1").password(this.passwordEncoder().encode("user")).roles("NORMAL");
-//	
-		auth.userDetailsService(customerDetailsService).passwordEncoder(passwordEncoder());
+		@Override
+		protected void configure(AuthenticationManagerBuilder auth ) throws Exception{
+			//auth.inMemoryAuthentication().withUser("admin").password(this.passwordEncoder().encode("admin")).roles("ADMIN");
+			//auth.inMemoryAuthentication().withUser("user").password(this.passwordEncoder().encode("user")).roles("NORMAL");
+		
+			auth.userDetailsService(customerDetailsService).passwordEncoder(passwordEncoder());
 
-	}
-	
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder(){
-		return new BCryptPasswordEncoder(10);  
-	}
-	
-	@Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
+		}
+		
+		@Bean
+		public BCryptPasswordEncoder passwordEncoder(){
+			return new BCryptPasswordEncoder(10);  
+		}
+		
+		@Bean
+	    public AuthenticationManager authenticationManagerBean() throws Exception {
+	        return super.authenticationManagerBean();
+	    }
 }
 
