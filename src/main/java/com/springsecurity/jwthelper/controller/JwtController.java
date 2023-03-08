@@ -44,12 +44,12 @@ public class JwtController {
         System.out.println(jwtRequest);
         try {
 
-            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getEmail(), jwtRequest.getPassword()));
+            this.authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(jwtRequest.getusersEmail(), jwtRequest.getPassword()));
 
 
         } catch (UsernameNotFoundException e) {
             e.printStackTrace();
-            throw new Exception("Bad Credentials");
+            throw new Exception("Username and password is not valid");
         }catch (BadCredentialsException e)
         {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class JwtController {
 
 
         //fine area..
-        UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getEmail());
+        UserDetails userDetails = this.customUserDetailsService.loadUserByUsername(jwtRequest.getusersEmail());
 
         String token = this.jwtUtil.generateToken(userDetails);
         System.out.println("JWT " + token);

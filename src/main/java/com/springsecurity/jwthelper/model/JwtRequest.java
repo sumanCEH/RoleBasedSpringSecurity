@@ -2,21 +2,21 @@ package com.springsecurity.jwthelper.model;
 
 public class JwtRequest {
 
-	private String email;
+	private String usersEmail;
 	private String password;
 
-	public JwtRequest(String email, String password) {
+	public JwtRequest(String usersEmail, String password) {
 		super();
-		this.email = email;
+		this.usersEmail = usersEmail;
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getusersEmail() {
+		return usersEmail;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setusersEmail(String email) {
+		this.usersEmail = email;
 	}
 
 	public String getPassword() {
@@ -29,6 +29,6 @@ public class JwtRequest {
 
 	@Override
 	public String toString() {
-		return "JwtRequest [email=" + email + ", password=" + password + "]";
+		return "JwtRequest [usersEmail=" + usersEmail + ", password=" + password + "]";
 	}
 }

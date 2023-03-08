@@ -2,6 +2,7 @@ package com.springsecurity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.springsecurity.entity.Users;
 import com.springsecurity.repository.UsersRepo;
 import com.springsecurity.service.UsersService;
-
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/public")
 public class HomeController {
@@ -47,7 +48,7 @@ public class HomeController {
 		}
 	}
 
-	@GetMapping("/login")
+	@PostMapping("/login")
 	public String login() {
 		return "user home page";
 	}
